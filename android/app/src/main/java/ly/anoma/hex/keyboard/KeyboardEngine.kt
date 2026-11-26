@@ -213,7 +213,7 @@ internal class KeyboardEngine(
         }
     }
 
-    /** The number row changed (Labs › Keyboard › Number row): the keys redraw with it at once. */
+    /** The number row changed (Settings › Keyboard › Number row): the keys redraw with it at once. */
     fun numberRowChanged() { showPlane() }
 
     /** The local currency changed (Labs › Keyboard › Local currency): the ?123 page and d's held symbol

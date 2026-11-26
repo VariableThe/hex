@@ -38,9 +38,9 @@ internal class TypingPreferences(context: Context) {
     var letterSymbols: Boolean
         get() = prefs.getBoolean("letterSymbols", false)
         set(value) { prefs.edit().putBoolean("letterSymbols", value).apply() }
-    /** Labs › Keyboard › Number row: the digits above the letters. Off by default. */
+    /** Settings › Keyboard › Number row: the digits above the letters. On by default. */
     var numberRow: Boolean
-        get() = prefs.getBoolean(NUMBER_ROW, false)
+        get() = prefs.getBoolean(NUMBER_ROW, true)
         set(value) { prefs.edit().putBoolean(NUMBER_ROW, value).apply() }
     /** Labs › Keyboard › Local currency: the phone's own currency on the ?123 page and d's held symbol
      * instead of $. Off by default. */

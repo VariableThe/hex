@@ -352,6 +352,8 @@ internal fun HexSettings(setup: Setup, speech: SpeechPreferences, typing: Typing
                                 if (selectedLayout == null) stringResource(R.string.settings_layout_follows, automatic.label) else null,
                                 selectedLayout?.label ?: stringResource(R.string.settings_automatic), { open(Page.Layout) })
                             Rule(); Entry(stringResource(R.string.settings_keyboard_height), value = stringResource(height.label), action = { open(Page.Height) })
+                            Rule(); Toggle(stringResource(R.string.number_row), stringResource(R.string.number_row_detail),
+                                numberRow) { typing.numberRow = it }
                             Rule(); Toggle(stringResource(R.string.settings_auto_capitalisation), stringResource(R.string.settings_auto_capitalisation_detail),
                                 autoCapitalize) { typing.autoCapitalize = it }
                             Rule(); Toggle(stringResource(R.string.settings_autocorrect), stringResource(R.string.settings_autocorrect_detail), autocorrect) { typing.autocorrect = it }
@@ -505,9 +507,6 @@ internal fun HexSettings(setup: Setup, speech: SpeechPreferences, typing: Typing
                             Card {
                                 Toggle(stringResource(R.string.letter_symbols), stringResource(R.string.letter_symbols_detail),
                                     letterSymbols) { typing.letterSymbols = it }
-                                Rule()
-                                Toggle(stringResource(R.string.number_row), stringResource(R.string.number_row_detail),
-                                    numberRow) { typing.numberRow = it }
                                 Rule()
                                 Toggle(stringResource(R.string.local_currency), stringResource(R.string.local_currency_detail),
                                     localCurrency) { typing.localCurrency = it }

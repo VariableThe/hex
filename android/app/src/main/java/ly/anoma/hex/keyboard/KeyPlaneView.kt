@@ -69,7 +69,7 @@ internal class KeyPlaneView(context: Context, private val ime: HexKeyboard, priv
         val under = pitch - key - top
     }
     private val plain = Band(rowHeight, keyHeight)
-    // Labs › Keyboard › Number row: Gboard's sizes for it and for the letter rows under it ([KeyRows.withNumberRow]).
+    // Settings › Keyboard › Number row: Gboard's sizes for it and for the letter rows under it ([KeyRows.withNumberRow]).
     private val numberRows = KeyRows.withNumberRow(rowSize, landscape)
     private val digitBand = Band(px(numberRows.digits.pitch), px(numberRows.digits.key))
     private val letterBand = Band(px(numberRows.letters.pitch), px(numberRows.letters.key))
@@ -311,7 +311,7 @@ internal class KeyPlaneView(context: Context, private val ime: HexKeyboard, priv
         val lines = page.lines
         val columns = KeyboardMetrics.columns(lines).toFloat()
         val side = KeyboardMetrics.sideWidth(page, lines)
-        // Labs › Keyboard › Number row: the digits above the letters, in a row of their own.
+        // Settings › Keyboard › Number row: the digits above the letters, in a row of their own.
         page.digits?.let { addDigitRow(it, columns) }
         val bands = bands(page)
         for ((index, line) in lines.withIndex()) {

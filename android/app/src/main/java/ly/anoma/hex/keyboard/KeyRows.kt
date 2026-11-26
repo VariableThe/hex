@@ -23,7 +23,7 @@ internal object KeyRows {
         else -> RowSize(48f, 37.7f)
     }
 
-    /** The rows with Labs › Keyboard › Number row on, as Gboard's (its Number row, same screens): the letter rows
+    /** The rows with Settings › Keyboard › Number row on, as Gboard's (its Number row, same screens): the letter rows
      * close up to [NUMBER_ROW_LETTERS] of their step with the same keys, and the number row's step is
      * [NUMBER_ROW] of theirs upright ([NUMBER_ROW_LANDSCAPE] turned), with the letters' new gap. A Pixel 8's
      * letters go every 56.4 dp and its digits every 52.6 dp (43.1 dp keys): the keyboard grows by 45 dp, not a

@@ -3404,7 +3404,7 @@ Android keyboard -> English, Spanish, German, Bokmål, French and Italian typing
 │   Unit tests plus a passing `./gradlew :app:testDebugUnitTest :app:compileDebugKotlin`
 │   on a GitHub-hosted runner (https://github.com/anomalyco/hex/actions/runs/45268305325, the
 │   latest observed verification); the repo has no Android CI.
-├── Labs > Keyboard > Number row (off) -> 1 2 3 4 5 6 7 8 9 0 above the letter rows on
+├── Keyboard > Number row (on by default) -> 1 2 3 4 5 6 7 8 9 0 above the letter rows on
 │   every layout (en, es, nb, de, fr, it), typed like normal keys. The first letter row's
 │   corner digits and digit-first hold are hidden while it shows; accents on hold stay, and
 │   the Symbols on letter keys hints and holds still work: row 1's first ten letters show a
