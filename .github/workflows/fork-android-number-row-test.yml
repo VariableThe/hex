@@ -1,0 +1,48 @@
+name: Fork Android number row test
+on:
+  push:
+    branches: [ci/hex-number-row-apk]
+    paths: [.github/workflows/fork-android-number-row-test.yml]
+permissions:
+  contents: read
+jobs:
+  test-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Check out pinned fork source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: 0741d440e4960100a8da6fd9197aaa14a5ebe3cd
+          persist-credentials: false
+      - name: Verify source and provision exact toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 0741d440e4960100a8da6fd9197aaa14a5ebe3cd
+          test -x "$JAVA_HOME_21_X64/bin/java"
+          echo "JAVA_HOME=$JAVA_HOME_21_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_21_X64/bin" >> "$GITHUB_PATH"
+          JAVA_HOME="$JAVA_HOME_21_X64" sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'ndk;27.2.12479018' 'cmake;3.22.1'
+      - name: Unit tests and ARM64 debug APK
+        working-directory: android
+        run: ./gradlew --no-daemon :app:testDebugUnitTest :app:assembleDebug
+      - name: Verify APK signature and ABI
+        working-directory: android
+        run: |
+          set -euo pipefail
+          apk=app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --print-certs "$apk"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$apk" | grep -E '^(package|sdkVersion|native-code):'
+          unzip -Z1 "$apk" | grep '^lib/arm64-v8a/libhexspeech.so$'
+          unzip -Z1 "$apk" | grep '^lib/arm64-v8a/libhexenglish.so$'
+          sha256sum "$apk"
+      - name: Keep experimental APK and unit reports
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: hex-number-row-debug-arm64
+          retention-days: 3
+          if-no-files-found: error
+          path: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android/app/build/test-results/testDebugUnitTest/*.xml
